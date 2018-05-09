@@ -32,7 +32,7 @@ io.on('connection', function(socket){
     io.emit('chat message', msg);
   });
 });
-io.origins(['http://127.0.0.1:8080','https://wuchaolong.github.io/video/']);
+// io.origins(['http://127.0.0.1:8080','https://wuchaolong.github.io/video/']);
 
 
 http.listen(port, function(){
