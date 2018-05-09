@@ -5,12 +5,13 @@ var url = require("url");
 
 
 var port = process.env.PORT || 3000;
-
 app.get('/', function(req, res, next){
-  res.sendFile(__dirname + '/index.html');
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Headers", "X-Requested-With");
   next();
+});
+app.get('/', function(req, res){
+  res.sendFile(__dirname + '/index.html');
 });
 app.get('/pay10', function(request, res){
     var emitId = url.parse(request.url,true).query.emitId;
