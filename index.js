@@ -1,10 +1,26 @@
 var app = require('express')();
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
+var url = require("url");
+
+
 var port = process.env.PORT || 3000;
 
 app.get('/', function(req, res){
   res.sendFile(__dirname + '/index.html');
+});
+app.get('/pay10', function(request, res){
+    var emitId = url.parse(request.url,true).query.emitId;
+//     io.emit(emitId, "100");
+//     console.log(emitId);
+      io.emit('chat message', emitId);
+
+    var redirect =  url.parse(request.url,true).query.redirect;
+    res.writeHead(302, {
+      'Location': redirect
+      //add other headers here...
+    });
+    res.end();
 });
 
 io.on('connection', function(socket){
